@@ -6,11 +6,9 @@ var app = express()
 const axios = require('axios');
 const url = require("url");
 
-var inventoryServiceRes;
 
-var urlInventory = "http://inventory-svc.ecom-system.local:8081"
-
-urlInventory="http://localhost:8081"
+var urlInventory = process.env.INVENTORY_URL || "http://inventory-svc.ecom-system.local:8081"
+// urlInventory="http://localhost:8081"
 
  
 //Define request response in root URL (/)
