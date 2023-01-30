@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="order" type="NodeJSConfigurationType" path-to-js-file="index.js" working-dir="$PROJECT_DIR$/order">
+    <envs>
+      <env name="INVENTORY_URL" value="http://localhost:8081" />
+    </envs>
+    <method v="2" />
+  </configuration>
+</component>
