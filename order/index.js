@@ -3,26 +3,39 @@ var express = require('express')
 var Request = require("request")
 var app = express()
 
+const axios = require('axios');
+const url = require("url");
+
 var inventoryServiceRes;
 
-var urlInventory = "http://inventory-svc.ecom-system.local:8081" 
+var urlInventory = "http://inventory-svc.ecom-system.local:8081"
+
+urlInventory="http://localhost:8081"
 
  
 //Define request response in root URL (/)
-app.get('/*', function (req, res) {
-   
-  //Calling Inventory Service 
-   Request.get(urlInventory, (error, response, body) => {
-   if(error) {
-      inventoryServiceRes='error';
+app.get('/*',  function (req, res) {
+
+    var config = {
+      method: 'get',
+      url: urlInventory,
+        headers:{},
+    };
+    let inventoryServiceRes='not processed';
+
+    axios(config)
+    .then(function (response) {
+        inventoryServiceRes = response.data
+        console.log(response.statusCode);
+    })
+    .catch(function (error) {
+        inventoryServiceRes = error
+      console.error("errer is",error);
+    })
+    .finally( ()=>{
+        res.send("Order ..Recieved. Processing started...| " + inventoryServiceRes )
     }
-    else{
-    inventoryServiceRes=body;
-  }
-})
-
-
-  res.send("Order ..Recieved. Processing started...| " + inventoryServiceRes )
+    )
 })
 
 //Launch listening server on port 8080
